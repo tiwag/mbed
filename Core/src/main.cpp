@@ -22,9 +22,9 @@ volatile bool bTh2_run = false;
 int main() // this is Thread 1
 {
   dbgini(RESETMSG);
-  pc.printf("SystemCoreClock = %lf MHz\r\n", (double)SystemCoreClock / 1E6);
   pc.printf("HAL_RCC_GetHCLKFreq = %lf MHz\r\n",
             (double)HAL_RCC_GetHCLKFreq() / 1E6);
+  pc.printf("SystemCoreClock = %lf MHz\r\n", (double)SystemCoreClock / 1E6);
 
   thTh2.start(callback(th2callback, &iTh2arg));
 
