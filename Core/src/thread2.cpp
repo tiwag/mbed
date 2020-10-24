@@ -41,7 +41,7 @@ void th2_run ( int* arg )
 void th2_stop ( void )
 {
     if( false == bStop ) {
-        dbos((char*)"\r\nTHREAD 2 STOPPED\r\n" );
+        dbos((char*)"THREAD 2 STOPPED\r\n" );
         bStop = true;
     }
     bRun = false;
@@ -49,7 +49,7 @@ void th2_stop ( void )
 
 void th2callback ( int *arg )
 {
-    dbos((char*)"\r\nTHREAD 2 STARTED\r\n" );
+    dbos((char*)"THREAD 2 STARTED\r\n" );
     iSleep_ms = *arg;
 
     while(1) {

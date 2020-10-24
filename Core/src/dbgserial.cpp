@@ -10,7 +10,7 @@ char cdbgrx;                // last received character within rx-interrupt
 bool bdbgrx;                // flag received character to user program
 
 int iDbgMsgCnt = 0;
-char cpDbgMsg[MAXMSG + 6];  // contains last message
+char cpDbgMsg[MAXMSG+1];  // contains last message
 
 bool bDbgCmd = false;       // new input available
 int iDbgCmd = 0;
