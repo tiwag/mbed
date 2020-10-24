@@ -37,10 +37,10 @@ int main() // this is Thread 1
 
 	double freq = 3.1415926;
 	int dutycycle = 23;
-	char comment[MAXMSG] = "template app";
+	char comment[MAXMSG] = "template_app";
 
 	while (1) {
-		if ((NONE == iDbgCmd) && bdbgrx) { // character received but not within Cmd input mode
+		if ((NONE == iDbgCmd) && bdbgrx) { // character rxvd, no Cmd input mode
 			bdbgrx = false;
 			iDbgMsgCnt = 0;
 			switch (cdbgrx) {
@@ -72,8 +72,7 @@ int main() // this is Thread 1
 				iDbgCmd = FREQU;
 				break;
 			case 'd':
-				pc.printf("\r\nactual dutycycle = %d, input new duty cycle = ",
-						dutycycle);
+				pc.printf("\r\nactual duty cycle  = %d, input new duty cycle = ", dutycycle);
 				iDbgCmd = PWMDC;
 				break;
 			case 'c':
@@ -87,31 +86,14 @@ int main() // this is Thread 1
 			switch (iDbgCmd) {
 			case FREQU:
 				sscanf(cpDbgMsg, "%lf", &freq);
-				pc.printf("   new frequency = %lf\r\n", freq);
+				pc.printf("new frequency = %lf\r\n", freq);
 				break;
 			case PWMDC:
 				sscanf(cpDbgMsg, "%d", &dutycycle);
-				pc.printf("   new dutycycle = %d\r\n", dutycycle);
+				pc.printf("new duty cycle = %d\r\n", dutycycle);
 				break;
 			case COMMENT:
-				for (int j = 0; j < 20; j++) {
-					char c = cpDbgMsg[j];
-					if (0 == j) {
-						if ('\r' == c) {
-							break;
-						} else {
-							comment[j] = c;
-						}
-					} else {
-						if ('\r' == c) {
-							c = 0;
-						}
-						comment[j] = c;
-					}
-					if (0 == c) {
-						break;
-					}
-				}
+				sscanf(cpDbgMsg, "%s", comment);
 				pc.printf("   new comment = \"%s\"\r\n", comment);
 				break;
 			case NONE:
